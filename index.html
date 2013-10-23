@@ -25,6 +25,15 @@
 			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
 		</script>
 
+		<style type="text/css">
+
+		.reveal section img {
+			border: 0 solid black;
+			background: none;
+		}
+
+		</style>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -84,7 +93,124 @@
 					<h4>(ou comment ne pas assumer sa défaite)</h4>
 				</section>
 
+				<section>
+					<h2>Le design classique</h2>					
 
+					<img src="./assets/images/classic-design.png">
+
+				</section>
+
+				<section>
+					<h2>Le cas Webview-Display</h2>					
+
+					<img src="./assets/images/ui-master-schema.png">
+				</section>
+
+				<section>
+					<h2>Le cas Webview Maître</h2>					
+
+					<ul>
+						<li>Header caché au démarrage</li>
+						<li>Webview prête -> ordonne l'affichage du Header</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2 style="color: #CF1626;">Titanium</h2>					
+					<small>un ami qui te veut du bien</small>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+// App side
+Ti.App.addEventListener('header:show', function () {
+    header.show();
+});
+
+
+// Webview side
+Ti.App.fireEvent('header:show');
+					</code></pre>
+				</section>
+				
+				<section>
+					<h2>Step by step</h2>
+					<img src="./assets/images/step-by-step.jpg" style="border: 2px solid white;"/>
+				</section>
+
+				<section>
+					<h2>#1: Création de l'UI</h2>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+// We are in app.js
+
+var win = Ti.UI.createWindow({fullscreen: true, backgroundColor: 'white'});
+var header = Ti.UI.createView({
+  left: 0, top: 0, right: 0, height: 44,
+  visible: false
+});
+var button = Ti.UI.createButton({
+	left: 2, top: 2, bottom: 2, width: 40
+});
+var webview = Ti.UI.createWebView({
+  left: 0, top: 44, right: 0, bottom: 0,
+  url: 'webapp.html'
+});
+
+win.add(header);
+win.add(webview);
+win.open();
+					</code></pre>
+				</section>
+				<section>
+					<h2>#2: Création de la WebApp</h2>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script&gt;
+    document.addEventListener('DOMContentLoaded', function () {
+        Ti.App.fireEvent('header:show');
+    });
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+    &lt;section id="menu" style="display: none;"&gt;
+      &lt;h1&gt;Dat Menu&lt;/h1&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Foobar&lt;/li&gt;
+        &lt;li&gt;42&lt;/li&gt;
+        &lt;li&gt;Awesome&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/section&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;
+
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>#3: Gestion du header</h2>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+// We are in app.js
+
+Ti.App.addEventListener('header:show', function () {
+    header.show();
+});
+
+button.addEventListener('click', function () {
+    Ti.App.fireEvent:('menu:show');
+});
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>#4: Gestion du menu</h2>
+					<pre><code data-trim contenteditable style="font-size: 18px; margin-top: 20px;">
+// We are in webapp.html
+
+Ti.App.addEventListener('menu:show', function () {
+    document.getElementById('menu').setAttribute('style', 'display: block;');
+});
+					</code></pre>
+				</section>
 			</div>
 
 		</div>
