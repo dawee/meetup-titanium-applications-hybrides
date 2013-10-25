@@ -32,6 +32,10 @@
 			background: none;
 		}
 
+		.lighton {
+			color: #CF1626;
+		}
+
 		</style>
 
 		<!--[if lt IE 9]>
@@ -81,7 +85,7 @@
 					<h2>Solutions envisageables</h2>					
 
 					<ol>
-						<li>iScroll / jQuery UI / Sencha Touch</li>
+						<li><span class="lighton">iScroll</span> / jQuery UI / Sencha Touch</li>
 						<li>Ne plus compter sur de la pure WebApp</li>
 						<li>Vendre de la méthamphétamine bleue au nouveau mexique</li>
 					</ol>
@@ -153,6 +157,7 @@ var webview = Ti.UI.createWebView({
   url: 'webapp.html'
 });
 
+header.add(button);
 win.add(header);
 win.add(webview);
 win.open();
@@ -196,7 +201,7 @@ Ti.App.addEventListener('header:show', function () {
 });
 
 button.addEventListener('click', function () {
-    Ti.App.fireEvent:('menu:show');
+    Ti.App.fireEvent('menu:show');
 });
 					</code></pre>
 				</section>
@@ -211,6 +216,24 @@ Ti.App.addEventListener('menu:show', function () {
 });
 					</code></pre>
 				</section>
+
+				<section>
+					<h2>Avant de se quitter</h2>
+					<h3>Quelques tricks de derrière les fagots</h3>
+
+					<ul>
+						<li><span class="lighton">Viewport</span> : une sale bête a dompter</li>
+						<li>Ne jamais toucher à location (cf Backbone.Router, page ...)</li>
+						<li>Un <span class="lighton">DOM léger</span> est un DOM qui se porte bien</li>
+					</ul>
+
+				</section>
+
+				<section>
+					<h1>Questions ?</h1>
+				</section>
+
+
 			</div>
 
 		</div>
@@ -224,7 +247,7 @@ Ti.App.addEventListener('menu:show', function () {
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: true,
-				progress: true,
+				progress: false,
 				history: true,
 				center: true,
 
