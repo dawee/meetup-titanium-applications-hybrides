@@ -1,5 +1,5 @@
 # 7e meetup Titatnium Paris
-## Developper des applications hybrides avec Titanium
+## Developper des applications hybrides
 
 Slides visibles ici : [dawicorti.github.io/meetup-titanium-applications-hybrides](http://dawicorti.github.io/meetup-titanium-applications-hybrides)
 
